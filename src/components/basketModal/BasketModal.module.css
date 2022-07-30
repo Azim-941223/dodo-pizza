@@ -1,0 +1,56 @@
+.wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: flex;  
+}
+
+.darkBlock {
+    height: 100vh;
+    width: calc(100vw - 430px);
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s linear;
+}
+.active > .modal{
+    right: 0;
+}
+.active > .darkBlock{
+    opacity: 1;
+    visibility: visible;
+}
+.modal {
+    position: fixed;
+    right: -430px;
+    width: 430px;
+    height: 100vh;
+    background: rgb(255, 255, 255);
+    transition: all 0.3s linear;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+}
+.container img{
+    width: 300px;
+    
+}
+.container h2{
+    margin: 20px 0;
+}
+.container p{
+    margin-bottom: 20px;
+}
+.container button{
+    width: fit-content;
+    margin: 0 auto;
+}
