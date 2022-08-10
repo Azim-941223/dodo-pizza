@@ -2,11 +2,12 @@ import BasketModal from "../basketModal/BasketModal";
 import css from './Navbar.module.css'
 import { useState } from 'react';
 
-function Navbar() {
+function Navbar({basket, onDelete}) {
   const [isModalOpen, setModalOpen] = useState(false)
   const onBasketOpen = () => {
     setModalOpen(!isModalOpen)
   }
+
   return (
     <div className={`container ${css.wrapper}`}>
       <div className={css.navigation}>
@@ -20,8 +21,10 @@ function Navbar() {
         <a href="#">Контакты</a>
         <a href="#">О нас</a>
       </div>
-      <button onClick={onBasketOpen} className='btn'>Корзина</button>
-      <BasketModal opened={isModalOpen} onBasketOpen={onBasketOpen}/>
+      <button onClick={onBasketOpen} className={`btn ${css.btn}`}>
+        Корзина {basket.length ? <span className={css.number}>| {basket.length}</span>: ''}
+      </button>
+      <BasketModal opened={isModalOpen} onBasketOpen={onBasketOpen} basket={basket} onDelete={onDelete}/>
     </div>
   )
 }

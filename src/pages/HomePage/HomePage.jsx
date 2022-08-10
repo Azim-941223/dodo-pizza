@@ -28,20 +28,63 @@ const SliderOrderCards = [
 ]
 
 
-function HomePage(props) {
-     const settings = {
+function HomePage({addToBasket,drinks,pizzas}) {
+  //pizza slider
+  function SampleNextArrow(props) {
+    const { className, onClick } = props;
+    return (
+      <div className={className} onClick={onClick}><img className="arrow" src="http://www.clker.com/cliparts/W/m/Q/r/8/U/arrow-orange-md.png" alt="arrow" /></div>
+    );
+  }
+  
+  function SamplePrevArrow(props) {
+    const { className, onClick } = props;
+    return (
+      <div className={className} onClick={onClick}><img className="left_arrow" src="http://www.clker.com/cliparts/q/y/0/D/W/W/orange-left-arrow-md.png" alt="arrow" /></div>
+    )
+  }
+
+  //order slider
+  function SampleNext(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "gray" }}
+        onClick={onClick}
+      />
+    );
+  }
+  
+  function SamplePrev(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "gray" }}
+        onClick={onClick}
+      />
+    );
+  }
+  
+
+    const settings = {
         dots: false,
         speed: 500,
         infinity: true,
         slidesToShow: 6,
         slidesToScroll: 6,
+        prevArrow: <SamplePrevArrow />,
+        nextArrow: <SampleNextArrow />,
      }
-     const settingsOrder = {
+    const settingsOrder = {
       dots: false,
       speed: 500,
       infinity: false,
       slidesToShow: 4,
       slidesToScroll: 1,
+      prevArrow: <SamplePrev/>,
+      nextArrow: <SampleNext/>,
      }
   return (
     <div className="container page">
@@ -60,19 +103,17 @@ function HomePage(props) {
         </div>
         <h1 className="title">Пицца</h1>
         <div className="cards_wrapper">
-          {props.pizzas.map((pizza) => <PizzaCard key={pizza.id} title={pizza.title}
+          {pizzas.map((pizza) => <PizzaCard key={pizza.id} id={pizza.id} title={pizza.title}
             description={pizza.description}
-            price={pizza.price}/>)}
+            price={pizza.price} addToBasket={addToBasket} />)}
         </div>
         <h2 className="title">Напитки</h2>
         <div className="cards_wrapper">
-        {props.drinks.map((drink) => (
+        {drinks.map((drink) => (
             <PizzaCard
               key={drink.id}
-              img={drink.img}
-              title={drink.title}
-              description={drink.description}
-              price={drink.price}
+              {...drink}
+              addToBasket={addToBasket}
             />
           ))
         }

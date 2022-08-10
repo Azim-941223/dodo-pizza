@@ -1,0 +1,26 @@
+.bgr{
+    background-color: #fff;
+    margin-top: 10px;
+}
+.content{
+    display: flex;
+    align-items: center;
+    padding: 15px 15px 10px 15px ;
+}
+.content img{
+    width: 70px;
+}
+.content_info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    width: 300px;
+}
+.x{
+    border: none;
+    font-size: 18px;
+    align-self: start;
+}
+.order_basket{
+    padding: 20px 15px 15px 15px ;
+}

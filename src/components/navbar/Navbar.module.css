@@ -21,3 +21,11 @@
 .navigation a:hover{
     color: rgb(255, 105, 0);
 }
+
+.btn:hover::after {
+    content: '|->';    
+}
+
+.btn:hover .number {
+    display: none;
+}

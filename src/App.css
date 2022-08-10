@@ -38,3 +38,22 @@
   font-size: 16px;
   cursor: pointer;
 }
+.arrow{
+  position: absolute;
+  width: 30px;
+}
+.left_arrow{
+  width: 30px;
+  position: fixed;
+  right: 10px;
+}
+.a{
+  border: 1px solid red;
+  display: flex;
+}
+.add_del{
+  display: flex;
+}
+.text_center{
+  text-align: center;
+}
