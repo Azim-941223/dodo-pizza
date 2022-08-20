@@ -1,9 +1,11 @@
 import BasketModal from "../basketModal/BasketModal";
 import css from './Navbar.module.css'
 import { useState } from 'react';
+import { useSelector } from "react-redux";
 
-function Navbar({basket, onDelete}) {
+function Navbar({onDelete}) {
   const [isModalOpen, setModalOpen] = useState(false)
+  const basket = useSelector((state) => state.basket.data)
   const onBasketOpen = () => {
     setModalOpen(!isModalOpen)
   }

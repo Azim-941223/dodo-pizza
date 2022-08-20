@@ -9,13 +9,13 @@ function AdminPage({pizzas,drinks}) {
         <Link to='/create-new-item' className="btn">Add new element</Link>
         <div className="cards_wrapper">
         {
-            pizzas.map((item) => (<PizzaCard key={item.id} {...item}  isAdmin={true}/>))
+            pizzas.map((item) => (<PizzaCard key={item.id} {...item}  isAdmin={true} link='pizza'/>))
         }
         </div>
         <h2 className="title">Напитки</h2>
         <div className="cards_wrapper">
             {
-                drinks.map((item) => (<PizzaCard key={item.id} {...item} isAdmin={true}/>))
+                drinks.map((item) => (<PizzaCard key={item.id} {...item} isAdmin={true} link='drinks'/>))
             }
         </div>
     </div>

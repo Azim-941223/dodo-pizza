@@ -28,7 +28,7 @@ const SliderOrderCards = [
 ]
 
 
-function HomePage({addToBasket,drinks,pizzas}) {
+function HomePage({drinks,pizzas}) {
   //pizza slider
   function SampleNextArrow(props) {
     const { className, onClick } = props;
@@ -105,7 +105,7 @@ function HomePage({addToBasket,drinks,pizzas}) {
         <div className="cards_wrapper">
           {pizzas.map((pizza) => <PizzaCard key={pizza.id} id={pizza.id} title={pizza.title}
             description={pizza.description}
-            price={pizza.price} addToBasket={addToBasket} />)}
+            price={pizza.price} />)}
         </div>
         <h2 className="title">Напитки</h2>
         <div className="cards_wrapper">
@@ -113,7 +113,6 @@ function HomePage({addToBasket,drinks,pizzas}) {
             <PizzaCard
               key={drink.id}
               {...drink}
-              addToBasket={addToBasket}
             />
           ))
         }

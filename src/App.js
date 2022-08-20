@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Footer from './components/footer/Footer';
 import AdminPage from './pages/AdminPage/AdminPage';
 import CreateNewElement from './pages/CreateNewElement/CreateNewElement';
+import { base_url } from './constants/constants';
 
 //const coworkers = [
 //  { first_name: 'Max', last_name: 'Mustermann' },
@@ -40,34 +41,35 @@ function App() {
   const [pizzas, setPizzas] = useState([]);
   const [drinks, setDrinks] = useState([]);
 
-  const[basket,setBasket] = useState(JSON.parse(localStorage.getItem('basket')) || [])
+  //const[basket,setBasket] = useState(JSON.parse(localStorage.getItem('basket')) || [])
 
   const [isLoading, setLoading] = useState(true);
 
-  useEffect(() => {
-    localStorage.setItem('basket', JSON.stringify(basket))
-  }, [basket])
+  //useEffect(() => {
+  //  localStorage.setItem('basket', JSON.stringify(basket))
+  //}, [basket])
 
 
-  const addToBasket = (pizza) => {
-    const isExist = basket.find((item) => item.id === pizza.id && pizza.isDrink === item?.isDrink)
-    console.log(isExist);
-    if (!isExist) {
-      setBasket([...basket, pizza])
-    }
-  }
+  //const addToBasket = (pizza) => {
+  //  const isExist = basket.find((item) => item.id === pizza.id && pizza.isDrink === item?.isDrink)
+  //  console.log(isExist);
+  //  if (!isExist) {
+  //    setBasket([...basket, pizza])
+  //  }
+  //}
 
-  const deleteBasket = (id) => {
-    const newArr = basket.filter((item) => item.id !== id)
-    setBasket(newArr)
-  }
+  //const deleteBasket = (id) => {
+  //  const newArr = basket.filter((item) => item.id !== id)
+  //  setBasket(newArr)
+  //}
 
+  //const DeleteItem = (id) =>
 
 
   useEffect(() => {
     Promise.all([
-      fetch("https://62d01fd0d9bf9f170583e94b.mockapi.io/pizza"),
-      fetch("https://62d01fd0d9bf9f170583e94b.mockapi.io/drinks"),
+      fetch(base_url + 'pizza'),
+      fetch(base_url + 'drinks'),
     ]).then((res) => {
       Promise.all(res.map((item) => item.json()))
         .then((data) => {
@@ -84,12 +86,12 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Navbar basket={basket} onDelete={deleteBasket}/>
+      <Navbar  /*onDelete={deleteBasket}*//>
 
       <Routes>
         <Route
           path="/"
-          element={<HomePage drinks={drinks} pizzas={pizzas} addToBasket={addToBasket}/>}
+          element={<HomePage drinks={drinks} pizzas={pizzas} />}
         />
         <Route path='/admin' element={<AdminPage pizzas={pizzas} drinks={drinks} />} />
         <Route path='/create-new-item' element={<CreateNewElement/>} />

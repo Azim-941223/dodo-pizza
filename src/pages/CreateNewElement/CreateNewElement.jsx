@@ -1,6 +1,7 @@
 import css from './CreateNewElement.module.css'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { base_url } from '../../constants/constants';
 
 function CreateNewElement() {
 
@@ -20,8 +21,7 @@ function CreateNewElement() {
       img: image,
       description: description
     }
-    console.log(newArr);
-      fetch('https://62d01fd0d9bf9f170583e94b.mockapi.io/' + status,{
+      fetch(base_url + status,{
         method: 'POST',
         body: JSON.stringify(newArr),
         headers: {

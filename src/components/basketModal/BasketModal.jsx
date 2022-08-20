@@ -1,7 +1,11 @@
+//import { useSelector } from "react-redux"
 import BasketOrder from "../basketOrder/BasketOrder"
 import css from "./BasketModal.module.css"
 
 function BasketModal({ opened, onBasketOpen, basket, onDelete }) {
+  //const test = useSelector((state) => state);
+  //console.log(test);
+
   const getSum = () => {
     const result = basket.reduce((sum, item) => {
       return sum + Number(item.price)
