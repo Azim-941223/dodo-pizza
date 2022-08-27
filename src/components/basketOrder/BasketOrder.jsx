@@ -1,9 +1,12 @@
 import css from './BasketOrder.module.css'
+import { useDispatch } from 'react-redux';
+import { basketAction } from '../../redux/basketSlice';
 
 function BasketOrder(props) {
+    const dispatch = useDispatch()
 
     const onDelete = () => {
-        props.onDelete(props.id)
+        dispatch(basketAction.deleteBasket(props.id))
     }
 
     return (

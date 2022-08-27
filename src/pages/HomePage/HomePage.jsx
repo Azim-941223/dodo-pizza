@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import Slider from "react-slick";
 import OrderCard from "../../components/orderCard/OrderCard";
 import PizzaCard from "../../components/pizzaCard/PizzaCard";
@@ -28,7 +29,9 @@ const SliderOrderCards = [
 ]
 
 
-function HomePage({drinks,pizzas}) {
+function HomePage() {
+  const pizzas = useSelector((state) => state.pizzas.data)
+  const drinks = useSelector((state) => state.drinks.data)
   //pizza slider
   function SampleNextArrow(props) {
     const { className, onClick } = props;
@@ -67,7 +70,6 @@ function HomePage({drinks,pizzas}) {
     );
   }
   
-
     const settings = {
         dots: false,
         speed: 500,

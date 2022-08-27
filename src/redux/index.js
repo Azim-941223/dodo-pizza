@@ -1,28 +1,21 @@
-import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { basketReducer } from "./basketSlice";
-
-const pizzasSlice = createSlice({
-    name: 'pizzas',
-    initialState: {
-        data:[]
-    },
-    reducers: {
-        addPizzas:(state) => {
-            console.log(state);
-        }
-    }
-})
+import { pizzasReducer } from "./pizzasSlice";
+import { drinksReducer } from "./drinksSlice";
 
 const redusers = combineReducers({
-    pizzas: pizzasSlice.reducer,
+    pizzas: pizzasReducer,
     basket: basketReducer,
+    drinks: drinksReducer,
 })
 
 export const store = configureStore({
     reducer: redusers,
 });
 
-window.store = store
+store.subscribe(() => {
+    const redux = store.getState()
+    localStorage.setItem('basket', JSON.stringify(redux.basket.data))
+})
 
-console.log(store);
-console.log(store.getState());
+

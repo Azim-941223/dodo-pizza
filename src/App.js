@@ -3,11 +3,14 @@ import Header from './components/header/Header';
 import Navbar from './components/navbar/Navbar';
 import { Routes, Route, } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Footer from './components/footer/Footer';
 import AdminPage from './pages/AdminPage/AdminPage';
 import CreateNewElement from './pages/CreateNewElement/CreateNewElement';
-import { base_url } from './constants/constants';
+import { useDispatch } from 'react-redux';
+import { getAllPizzas } from './redux/pizzasSlice';
+import { getAllDrinks } from './redux/drinksSlice';
+import { useSelector } from 'react-redux';
 
 //const coworkers = [
 //  { first_name: 'Max', last_name: 'Mustermann' },
@@ -38,62 +41,28 @@ import { base_url } from './constants/constants';
 //const local = ; //need ride code out function, becouse this code be work only one time
 
 function App() {
-  const [pizzas, setPizzas] = useState([]);
-  const [drinks, setDrinks] = useState([]);
 
-  //const[basket,setBasket] = useState(JSON.parse(localStorage.getItem('basket')) || [])
+  //const [isLoading, setLoading] = useState(true);
 
-  const [isLoading, setLoading] = useState(true);
-
-  //useEffect(() => {
-  //  localStorage.setItem('basket', JSON.stringify(basket))
-  //}, [basket])
-
-
-  //const addToBasket = (pizza) => {
-  //  const isExist = basket.find((item) => item.id === pizza.id && pizza.isDrink === item?.isDrink)
-  //  console.log(isExist);
-  //  if (!isExist) {
-  //    setBasket([...basket, pizza])
-  //  }
-  //}
-
-  //const deleteBasket = (id) => {
-  //  const newArr = basket.filter((item) => item.id !== id)
-  //  setBasket(newArr)
-  //}
-
-  //const DeleteItem = (id) =>
-
+  const dispatch = useDispatch()
+  const isPizzasLoading = useSelector((state) => state.pizzas.isLoading)
+  const isDrinksLoading = useSelector((state) => state.pizzas.isLoading)
 
   useEffect(() => {
-    Promise.all([
-      fetch(base_url + 'pizza'),
-      fetch(base_url + 'drinks'),
-    ]).then((res) => {
-      Promise.all(res.map((item) => item.json()))
-        .then((data) => {
-          setLoading(false)
-          setPizzas(data[0])
-          setDrinks(data[1].map((el) => ({...el, isDrink: true})))
-        })
-    })
-  }, []);
+    dispatch(getAllPizzas())
+    dispatch(getAllDrinks())
+  }, [dispatch]);
 
-  if (isLoading) {
+  if (isPizzasLoading || isDrinksLoading) {
     return <h1>...Loading</h1>;
   }
   return (
     <div className="App">
       <Header />
-      <Navbar  /*onDelete={deleteBasket}*//>
-
+      <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={<HomePage drinks={drinks} pizzas={pizzas} />}
-        />
-        <Route path='/admin' element={<AdminPage pizzas={pizzas} drinks={drinks} />} />
+        <Route path="/" element={<HomePage />}/>
+        <Route path='/admin' element={<AdminPage />} />
         <Route path='/create-new-item' element={<CreateNewElement/>} />
       </Routes>
       <Footer/>

@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
 import PizzaCard from "../../components/pizzaCard/PizzaCard"
+import { useSelector } from 'react-redux';
 
-function AdminPage({pizzas,drinks}) {
+function AdminPage() {
+  const pizzas = useSelector((state) => state.pizzas.data)
+  const drinks = useSelector((state) => state.drinks.data)
   return (
     <div className="container page">
         <h1>Admin panel</h1>

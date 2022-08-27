@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { base_url } from "../../constants/constants";
 import { basketAction } from "../../redux/basketSlice";
 import css from "./PizzaCard.module.css";
+import Api from '../../api/Api';
 
 function PizzaCard({title,price,description, img, id, isAdmin, isDrink, link}) {
   //const handlClick = () => addToBasket(
@@ -11,19 +11,26 @@ function PizzaCard({title,price,description, img, id, isAdmin, isDrink, link}) {
 
 
   const handlReduxClick = () => {
-    const test = basketAction.addToBasket({title,price,description, img, id, isDrink})
-    console.log(test);
-    dispatch(test)
+    dispatch(basketAction.addToBasket({title,price,description, img, id, isDrink}))
   }
 
   const deleteItem = () => {
-    fetch(`${base_url}${link}/${id}` , {
-      method:'DELETE'
-    })
-    .then(() => {
-      alert('OK')
-      window.location.reload()
-    })
+    if (link === 'pizza') {
+      Api.deletePizza(id).then(() => {
+        window.location.reload()
+      })
+    } else {
+      Api.deleteDrink(id).then(() => {
+        window.location.reload()
+      })
+    }
+    //fetch(`${base_url}${link}/${id}` , {
+    //  method:'DELETE'
+    //})
+    //.then(() => {
+    //  alert('OK')
+    //  window.location.reload()
+    //})
   }
   
   return (
